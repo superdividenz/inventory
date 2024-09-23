@@ -48,54 +48,54 @@ const Inventory = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Inventory Items</h2>
-      <div className="flex mb-4">
+    <div className="p-4 md:p-6 bg-gray-100 rounded-lg shadow-md mx-auto max-w-2xl">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Inventory Items</h2>
+      <div className="flex flex-col md:flex-row mb-4">
         <input 
           type="text" 
           value={newItem} 
           onChange={(e) => setNewItem(e.target.value)} 
           placeholder="Add new item" 
-          className="border border-gray-300 rounded-l-md p-2 flex-grow"
+          className="border border-gray-300 rounded-md p-2 flex-grow mb-2 md:mb-0 md:mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button 
           onClick={addItem} 
-          className="bg-blue-500 text-white rounded-r-md p-2 hover:bg-blue-600"
+          className="bg-blue-600 text-white rounded-md p-2 hover:bg-blue-700 transition duration-200"
         >
           Add Item
         </button>
       </div>
-      <ul className="list-disc pl-5">
+      <ul className="list-disc pl-5 space-y-2">
         {items.map(item => (
-          <li key={item.id} className="py-1 flex justify-between items-center">
+          <li key={item.id} className="py-2 flex flex-col md:flex-row justify-between items-center bg-white rounded-md shadow-sm p-2">
             {editItemId === item.id ? (
-              <div className="flex">
+              <div className="flex w-full">
                 <input 
                   type="text" 
                   value={editItemName} 
                   onChange={(e) => setEditItemName(e.target.value)} 
-                  className="border border-gray-300 rounded-md p-1"
+                  className="border border-gray-300 rounded-md p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
                 <button 
                   onClick={() => updateItem(item.id)} 
-                  className="bg-green-500 text-white rounded-md p-1 ml-2 hover:bg-green-600"
+                  className="bg-green-600 text-white rounded-md p-2 ml-2 hover:bg-green-700 transition duration-200"
                 >
                   Update
                 </button>
               </div>
             ) : (
-              <span>{item.name}</span>
+              <span className="text-lg">{item.name}</span>
             )}
-            <div>
+            <div className="flex mt-2 md:mt-0">
               <button 
                 onClick={() => { setEditItemId(item.id); setEditItemName(item.name); }} 
-                className="bg-yellow-500 text-white rounded-md p-1 ml-2 hover:bg-yellow-600"
+                className="bg-yellow-500 text-white rounded-md p-2 ml-2 hover:bg-yellow-600 transition duration-200"
               >
                 Edit
               </button>
               <button 
                 onClick={() => deleteItem(item.id)} 
-                className="bg-red-500 text-white rounded-md p-1 ml-2 hover:bg-red-600"
+                className="bg-red-600 text-white rounded-md p-2 ml-2 hover:bg-red-700 transition duration-200"
               >
                 Delete
               </button>
