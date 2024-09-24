@@ -1,10 +1,12 @@
+// App.jsx
 import React, { useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { auth } from './firebase'; 
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { auth } from './firebase';
 import Inventory from './Inventory';
-import Login from './components/Login.js'; 
-import Header from './components/Header.js'; 
+import Login from './components/Login';
+import Header from './components/Header';
+import Home from './components/Home';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -17,19 +19,27 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      setUser(null); // Clear user state after logout
+    } catch (error) {
+      console.error('Error logging out:', error.message);
+    }
+  };
+
   return (
     <Router>
       <div>
-        <Header />
-        {user ? (
-          <>
-            <h1>Welcome, {user.email}</h1>
-            <button onClick={() => auth.signOut()}>Logout</button>
-            <Inventory />
-          </>
-        ) : (
-          <Login />
-        )}
+        <Header user={user} onLogout={handleLogout} />
+        <Routes>
+          {/* Redirect to Home when logged in */}
+          <Route path="/" element={user ? <Navigate to="/home" /> : <Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={user ? <Home user={user} /> : <Navigate to="/Home" />} />
+          <Route path="/inventory" element={user ? <Inventory /> : <Navigate to="/login" />} />
+        </Routes>
       </div>
     </Router>
   );

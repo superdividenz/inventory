@@ -9,6 +9,7 @@
     "ajv": "^8.17.1",
     "ajv-keywords": "^5.1.0",
     "autoprefixer": "^10.4.20",
+    "caniuse-lite": "^1.0.30001663",
     "enhanced-resolve": "^5.17.1",
     "firebase": "^10.13.2",
     "postcss": "^8.4.47",
@@ -30,6 +31,17 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "*.test.js",
+          "*.spec.js"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
     ]
   },
   "browserslist": {
@@ -43,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "eslint": "^9.11.1",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-jest": "^28.8.3"
   }
 }
