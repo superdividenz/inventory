@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { auth } from './firebase';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Redirect to home page upon successful login
-      navigate('/'); // Navigate to the home page
+      // Redirect or update state upon successful login
     } catch (error) {
       console.error('Error logging in:', error.message);
-      // You might want to show an error message to the user here
     }
   };
 
