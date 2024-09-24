@@ -40,7 +40,7 @@ function Boathouse() {
 
   const updateItem = async (id, updatedQuantity) => {
     const itemDoc = doc(db, "boathouse", id);
-    await updateDoc(itemDoc, { quantity: updatedQuantity });
+    await updateDoc(itemDoc, { quantity: parseInt(updatedQuantity) });
     fetchItems();
   };
 
