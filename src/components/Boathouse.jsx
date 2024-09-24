@@ -8,7 +8,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "./firebase"; // Make sure this path is correct
+import { db } from "../firebase"; // Make sure this path is correct
 
 function Boathouse() {
   const [items, setItems] = useState([]);
