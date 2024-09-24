@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { auth } from './firebase';
-import Inventory from './Inventory';
+import { auth } from './components/firebase';
+import Inventory from './components/Inventory';
 import Login from './components/Login';
 import Header from './components/Header';
 import Home from './components/Home';
