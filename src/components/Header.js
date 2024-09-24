@@ -3,11 +3,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const Header = ({ user, onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate(); // Use the useNavigate hook
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await onLogout(); // Call the onLogout function passed as prop
-    navigate("/login"); // Redirect to the login page
+    await onLogout();
+    navigate("/login");
   };
 
   return (
@@ -27,21 +27,19 @@ const Header = ({ user, onLogout }) => {
         {/* Navigation */}
         <nav className={`${isOpen ? "block" : "hidden"} md:block`}>
           <ul className="flex md:space-x-4 justify-between items-center w-full md:w-auto">
-            {/* Show Home button only when logged out */}
-            {!user && (
-              <li className="flex-1 text-center">
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive 
-                      ? "bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200" 
-                      : "bg-transparent text-white p-2 rounded hover:bg-blue-700 transition duration-200"
-                  }
-                >
-                  Home
-                </NavLink>
-              </li>
-            )}
+            {/* Always show Home button */}
+            <li className="flex-1 text-center">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive 
+                    ? "bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200" 
+                    : "bg-transparent text-white p-2 rounded hover:bg-blue-700 transition duration-200"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
             <li className="flex-1 text-center">
               <NavLink
                 to="/inventory"
@@ -54,14 +52,27 @@ const Header = ({ user, onLogout }) => {
                 Inventory
               </NavLink>
             </li>
-            {user && (
+            {user ? (
               <li className="flex-1 text-center">
                 <button
-                  onClick={handleLogout} // Call the handleLogout function
+                  onClick={handleLogout}
                   className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200 w-full"
                 >
                   Logout
                 </button>
+              </li>
+            ) : (
+              <li className="flex-1 text-center">
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive 
+                      ? "bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition duration-200" 
+                      : "bg-transparent text-white p-2 rounded hover:bg-blue-700 transition duration-200"
+                  }
+                >
+                  Login
+                </NavLink>
               </li>
             )}
           </ul>
