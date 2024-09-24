@@ -1,6 +1,6 @@
 // inventory.js
 import React from "react";
-import Boathouse from "../components/Boathouse"; // Adjust the path if necessary
+import Boathouse from "../components/Boathouse";
 
 function Inventory() {
   return (
