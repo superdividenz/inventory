@@ -1,10 +1,10 @@
 // inventory.js
 import React from "react";
 import Boathouse from "../components/Boathouse";
-import DownstairsFreezer from "../components/DownstairsFreezer";
-import DownstairsFridge from "../components/DownstairsFridge";
-import DownstairsShelves from "../components/DownstairsShelves";
-import UpstairsFridge from "../components/UpstairsFridge";
+import DownstairsFreezer from "../components/downstairsFreezer";
+import DownstairsFridge from "../components/downstairsFridge";
+import DownstairsShelves from "../components/downstairsShelves";
+import UpstairsFridge from "../components/upstairsFridge";
 
 function Inventory() {
   return (
