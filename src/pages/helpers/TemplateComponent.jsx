@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import Boathouse from "../../components/Boathouse";
+
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -22,13 +24,10 @@ const TemplateComponent = () => {
         className="template"
         style={{ padding: "20px", backgroundColor: "#f8f9fa" }}
       >
-        <h1>My Template</h1>
-        <p>This is a sample template to capture with html2canvas.</p>
-        <p>Feel free to customize the content and styles!</p>
-      </div>
-      <button onClick={handleDownloadPdf} style={{ marginTop: "20px" }}>
-        Download as PDF
-      </button>
+        <Boathouse />
+      </div>{" "}
+      {/* This closing tag was missing */}
+      <button onClick={handleDownloadPdf}>Download PDF</button>
     </div>
   );
 };

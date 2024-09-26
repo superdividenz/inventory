@@ -9,7 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useReactToPrint } from "react-to-print";
-import TemplateComponent from "./TemplateComponent"; // Import your TemplateComponent
+import TemplateComponent from "./helpers/TemplateComponent";
 
 function CRUDComponent() {
   const [inventory, setInventory] = useState([]);
