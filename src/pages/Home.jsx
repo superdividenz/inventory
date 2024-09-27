@@ -7,7 +7,7 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-} from "firebase/firestore"; // Import necessary Firestore functions
+} from "firebase/firestore"; 
 
 const Messages = () => {
   // Renamed from messages to Messages
