@@ -43,6 +43,7 @@ function CRUDComponent() {
     await deleteDoc(doc(db, "inventory", id));
     fetchinventory();
   };
+
   // print
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
