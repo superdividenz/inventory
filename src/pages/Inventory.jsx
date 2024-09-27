@@ -9,20 +9,19 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useReactToPrint } from "react-to-print";
-import TemplateComponent from "./helpers/TemplateComponent";
 
 function CRUDComponent() {
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setinventory] = useState([]);
   const [newItem, setNewItem] = useState({ name: "", description: "" });
   const componentRef = useRef();
 
   useEffect(() => {
-    fetchInventory();
+    fetchinventory();
   }, []);
 
-  const fetchInventory = async () => {
+  const fetchinventory = async () => {
     const querySnapshot = await getDocs(collection(db, "inventory"));
-    setInventory(
+    setinventory(
       querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
     );
   };
@@ -31,20 +30,21 @@ function CRUDComponent() {
     if (newItem.name && newItem.description) {
       await addDoc(collection(db, "inventory"), newItem);
       setNewItem({ name: "", description: "" });
-      fetchInventory();
+      fetchinventory();
     }
   };
 
   const updateItem = async (id, updatedItem) => {
     await updateDoc(doc(db, "inventory", id), updatedItem);
-    fetchInventory();
+    fetchinventory();
   };
 
   const deleteItem = async (id) => {
     await deleteDoc(doc(db, "inventory", id));
-    fetchInventory();
+    fetchinventory();
   };
 
+  // print
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
@@ -77,7 +77,6 @@ function CRUDComponent() {
         </button>
       </div>
       <div ref={componentRef} className="space-y-4">
-        <TemplateComponent inventory={inventory} />
         {inventory.map((item) => (
           <div key={item.id} className="bg-gray-100 p-4 rounded">
             <h3 className="text-xl font-semibold">{item.name}</h3>
@@ -103,7 +102,7 @@ function CRUDComponent() {
         onClick={handlePrint}
         className="mt-6 bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
       >
-        Print
+        Print to PDF
       </button>
     </div>
   );

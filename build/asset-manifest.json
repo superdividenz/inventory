@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.54d9530c.css",
+    "main.js": "/static/js/main.10b7f015.js",
+    "static/media/RetreatRocks.png": "/static/media/RetreatRocks.c154e8c1addaa5bf46ea.png",
+    "index.html": "/index.html",
+    "main.54d9530c.css.map": "/static/css/main.54d9530c.css.map",
+    "main.10b7f015.js.map": "/static/js/main.10b7f015.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.54d9530c.css",
+    "static/js/main.10b7f015.js"
+  ]
+}

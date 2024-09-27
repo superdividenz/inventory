@@ -1,79 +1,518 @@
-import React, { useState } from "react";
-import { jsPDF } from "jspdf";
-import RetreatRocks from "../img/RetreatRocks.png";
+import React from "react";
+import DynamicForm from "../components/DynamicForm";
+import RetreatBanner from "../img/RetreatRocks.png";
 
-const Chair = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    doc.text(`Name: ${formData.name}`, 10, 10);
-    doc.text(`Email: ${formData.email}`, 10, 20);
-    // Add more form data to the PDF as needed
-    doc.save("retreat-schedule.pdf");
-  };
-
+const RetreatMemo = () => {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-8 bg-gray-50 rounded-lg shadow-md">
+      {/* Image at the top */}
       <img
-        src={RetreatRocks}
+        src={RetreatBanner}
         alt="Retreat Banner"
-        className="w-2/3 h-auto mb-6 rounded-lg"
+        className="w-full h-auto mb-6 rounded-lg"
       />
+      {/* Memo Introduction */}
+      <p className="mb-4 text-gray-700 leading-relaxed">
+        This email/memo is being sent to everyone who is registered for the
+        upcoming{" "}
+        <strong className="font-bold">
+          Lake of Dreams 2024 Fall Recovery Retreat
+        </strong>
+        (Sept 20th – Sept 22nd). The tentative meeting schedule, menu & service
+        work assignments, and roster of attendees follow.
+      </p>
 
-      <h1 className="text-3xl font-bold mb-6">Retreat Schedule</h1>
+      <p className="mb-6 text-gray-700 leading-relaxed">
+        <em className="italic">
+          Menu adjustments might be made based upon what is on sale.
+        </em>
+        <br />
+        If you do not like your service work assignment, you are free to trade
+        with someone else; please let one of the chairs know.
+        <br />
+        If you do not like your room assignment, you are also free to trade with
+        someone else; ditto.
+        <br />
+        <strong className="font-bold text-red-600">
+          EVERY ATTENDEE WILL BE REQUIRED TO SIGN A WAIVER UPON ARRIVAL IN ORDER
+          TO ATTEND.
+        </strong>
+      </p>
 
-      {/* Form for user input */}
-      <form className="mb-8">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          className="mb-2 p-2 border rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          className="mb-2 p-2 border rounded"
-        />
-        <button
-          type="button"
-          onClick={exportToPDF}
-          className="bg-blue-500 text-white p-2 rounded"
-        >
-          Export to PDF
-        </button>
+      {/* Contact Information */}
+      <p className="mb-6 text-gray-700">
+        Any questions or suggestions, please contact the retreat chair team.
+        <br />
+        Yours in service, yours in sobriety…
+      </p>
+
+      {/* Retreat Chairs (Editable Form) */}
+      <h2 className="text-xl font-bold mb-4">RETREAT CHAIRS</h2>
+      <form className="grid grid-cols-2 gap-4 mb-6 text-gray-700">
+        {/* Chair Information */}
+        <div className="mb-4">
+          <label className="block font-semibold mb-2" htmlFor="chairName">
+            Chair Name:
+          </label>
+          <input
+            id="chairName"
+            type="text"
+            name="chairName"
+            value=""
+            onChange=""
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block font-semibold mb-2" htmlFor="chairPhone">
+            Chair Phone:
+          </label>
+          <input
+            id="chairPhone"
+            type="tel"
+            name="chairPhone"
+            value=""
+            onChange=""
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        {/* Co-Chair Information */}
+        <div className="mb-4">
+          <label className="block font-semibold mb-2" htmlFor="coChairName">
+            Co-Chair Name:
+          </label>
+          <input
+            id="coChairName"
+            type="text"
+            name="coChairName"
+            value=""
+            onChange=""
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block font-semibold mb-2" htmlFor="coChairPhone">
+            Co-Chair Phone:
+          </label>
+          <input
+            id="coChairPhone"
+            type="tel"
+            name="coChairPhone"
+            value=""
+            onChange=""
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
       </form>
 
-      {/* Existing schedule content */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Friday</h2>
-        {/* ... (rest of the Friday schedule) */}
-      </div>
+      {/* Directions */}
+      <h2 className="text-xl font-bold mb-4">
+        Lake of Dreams Address, Phone Number, and Driving Directions
+      </h2>
+      <p className="mb-6 text-gray-700 leading-relaxed">
+        <strong className="font-bold">Driving Directions:</strong> From I-270
+        N/E, take Exit 31B to merge onto MO-367 N/Lewis and Clark Blvd. toward
+        Alton IL. Continue onto US-67 N across Alton Bridge, for a total of 12.1
+        miles. Left turn at stoplight at end of bridge onto Landmarks
+        Blvd./US-67 N. Go 0.3 miles. Left turn at stoplight onto IL-100 N/W.
+        Broadway/Great River Road, McAdams Parkway. Follow for 4.4 miles to
+        stoplight intersection; right turn onto Clifton Terrace Road. Follow 0.8
+        miles up hill. Turn left onto IL-3 N. Follow for 5.4 miles. Continue
+        straight/bear to your right onto IL-109 N for 4.9 miles. Left turn onto
+        Lodi Road. Follow for 1.4 miles. Lake of Dreams on Left. Park in circle
+        in front or side parking lot. Parking space in circle just before front
+        door reserved for Paul M.
+      </p>
 
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Saturday</h2>
-        {/* ... (rest of the Saturday schedule) */}
-      </div>
+      {/* Items to Bring */}
+      <h2 className="text-xl font-bold mb-4">
+        Items to consider bringing with you:
+      </h2>
+      <ul className="list-disc list-inside text-gray-700 mb-8">
+        <li>
+          "CHILLY WEATHER" CLOTHING for 6 AM meditation, nighttime bonfires, and
+          all meetings around the fire pit.
+        </li>
+        <li>Indoor footwear - loafers/crocs/slippers/sandals, etc.</li>
+        <li>
+          Winter jacket/sweatshirt/long sleeve shirts/winter weight sleepwear.
+        </li>
+        <li>Earplugs (everyone snores).</li>
+        <li>Alarm clock.</li>
+        <li>Camera.</li>
+        <li>Flashlight.</li>
+        <li>Toiletries.</li>
+        <li>Towel/Washcloth.</li>
+        <li>Pillow/sleeping bag/blanket.</li>
+        <li>Bug spray.</li>
+        <li>Sunglasses.</li>
+        <li>Swim trunks for hot tub.</li>
+      </ul>
 
-      <div className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Sunday</h2>
-        {/* ... (rest of the Sunday schedule) */}
+      {/* Schedule, Menu, and Roster */}
+      <h2 className="text-xl font-bold mb-4">
+        Schedule, Menu, and Service Work Assignments
+      </h2>
+      <h2 className="text-xl font-bold mb-4">Friday Schedule</h2>
+      <div className="mb-6 text-gray-700">
+        {/* Arrival and Dinner Information */}
+        <p className="mb-4">
+          <span className="font-semibold">Arrive anytime between:</span> 4:00 PM
+          and 7:00 PM (Dinner at 6:00 PM)
+        </p>
+        <p className="font-semibold text-lg mb-2">6:00 PM – Dinner</p>
+        <p className="mb-4">
+          <span className="font-semibold">Enter meals, names, etc.</span>
+        </p>
+
+        {/* Crew Information */}
+        <h3 className="text-lg font-semibold mb-2">
+          Crew Chief:
+          <input
+            id="chairName"
+            type="text"
+            value=""
+            onChange=""
+            className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </h3>
+        <p className="mb-2 font-semibold">Prep, Cleanup and Beverages:</p>
+        <ul className="list-disc list-inside mb-4">
+          <li>
+            <input
+              id="chairName"
+              type="text"
+              value=""
+              onChange=""
+              className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+          <li>
+            <input
+              id="chairName"
+              type="text"
+              value=""
+              onChange=""
+              className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+          <li>
+            <input
+              id="chairName"
+              type="text"
+              value=""
+              onChange=""
+              className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="container mx-auto p-4 bg-gray-50 rounded-lg shadow-md">
+        <h2 class="text-xl font-bold mb-4">Friday</h2>
+        <p class="mb-4">
+          <strong>7:30 PM – Introductions Meeting:</strong> Led by Kent Boaz,
+          Douglas Hilbert, Ty Hyde
+          <br />
+          (Brownies / Ice Cream after Meeting)
+          <br />
+          <strong>Dinner crew</strong>
+        </p>
+
+        <h2 class="text-xl font-bold mb-4">Saturday</h2>
+        <p class="mb-4">
+          <strong>Time not otherwise indicated is open/free time</strong>
+        </p>
+
+        <div class="mb-6">
+          <p>
+            <strong>6:00 AM</strong> – Meditation (Optional) – volunteer to lead
+          </p>
+          <p>
+            <strong>7:30 AM</strong> – Breakfast
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> RYAN BENNETT
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> MIKE TAYLOR, JOSEPH
+            McCULLOCH, NEAL SANDERS
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>8:30 AM</strong> – Meeting
+          </p>
+          <p>
+            <strong>AA Chair:</strong> TY HYDE
+          </p>
+          <p>
+            <strong>AA Speaker:</strong> RICHARD MONTAGUE
+          </p>
+          <input
+            type="text"
+            placeholder="Enter name"
+            class="p-2 border border-gray-300 rounded w-full my-2"
+          />
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>12:30 PM</strong> – Lunch
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> TODD BOWERSON
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> ANTHONY DARRIS, BRUCE
+            STOCCO, GABE DADANT
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>1:30 PM</strong> – Meeting
+          </p>
+          <p>
+            <strong>Al-Anon Chair:</strong> JOE DOLAN
+          </p>
+          <p>
+            <strong>Al-Anon Speaker:</strong> CORY YOUNGER
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>7:00 PM</strong> – Dinner
+          </p>
+        </div>
+      </div>
+      <div class="container mx-auto p-4 bg-gray-50 rounded-lg shadow-md">
+        {/* <!-- Friday Section --> */}
+        <h2 class="text-xl font-bold mb-4">Friday</h2>
+        <p class="mb-4">
+          <strong>7:30 PM – Introductions Meeting:</strong> Led by Kent Boaz,
+          Douglas Hilbert, Ty Hyde
+          <br />
+          (Brownies / Ice Cream after Meeting)
+          <br />
+          <strong>Dinner crew</strong>
+        </p>
+
+        {/* <!-- Saturday Section --> */}
+        <h2 class="text-xl font-bold mb-4">Saturday</h2>
+        <p class="mb-4">
+          <strong>Time not otherwise indicated is open/free time</strong>
+        </p>
+
+        <div class="mb-6">
+          <p>
+            <strong>6:00 AM</strong> – Meditation (Optional) – volunteer to lead
+          </p>
+          <p>
+            <strong>7:30 AM</strong> – Breakfast
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> RYAN BENNETT
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> MIKE TAYLOR, JOSEPH
+            McCULLOCH, NEAL SANDERS
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>8:30 AM</strong> – Meeting
+          </p>
+          <p>
+            <strong>AA Chair:</strong> TY HYDE
+          </p>
+          <p>
+            <strong>AA Speaker:</strong> RICHARD MONTAGUE
+          </p>
+          <input
+            type="text"
+            placeholder="Enter name"
+            class="p-2 border border-gray-300 rounded w-full my-2"
+          />
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>12:30 PM</strong> – Lunch
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> TODD BOWERSON
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> ANTHONY DARRIS, BRUCE
+            STOCCO, GABE DADANT
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>1:30 PM</strong> – Meeting
+          </p>
+          <p>
+            <strong>Al-Anon Chair:</strong> JOE DOLAN
+          </p>
+          <p>
+            <strong>Al-Anon Speaker:</strong> CORY YOUNGER
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>7:00 PM</strong> – Dinner
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> PAUL STURMA
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> MARK FAVAZZA, MICHAEL
+            KINSELLA, JOE DOLAN
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>8:00 PM</strong> – Meeting
+          </p>
+          <p>(Brownies / Ice Cream after Meeting)</p>
+          <p>
+            <strong>AA Chair:</strong> PATRICK DRISCOLL
+          </p>
+          <p>
+            <strong>AA Speaker:</strong> TODD BOWERSON
+          </p>
+        </div>
+
+        {/* <!-- Sunday Section --> */}
+        <h2 class="text-xl font-bold mb-4">Sunday</h2>
+        <p class="mb-4">
+          <strong>Depart after clean-up</strong>
+        </p>
+
+        <div class="mb-6">
+          <p>
+            <strong>6:00 AM</strong> – Meditation (Optional) – volunteer lead
+          </p>
+          <p>
+            <strong>7:30 AM</strong> – Breakfast
+          </p>
+          <p>
+            <strong>Crew Chief:</strong> RICHARD MONTAGUE
+          </p>
+          <p>
+            <strong>Prep, Cleanup, Beverages:</strong> JOE JOYCE, JACKSON LONG
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>8:30 AM</strong> – Closing Meeting (Chair, Co-Chair & Shadow
+            Lead)
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <p>
+            <strong>10:00 AM – 11:30 AM</strong> – Cleanup: ALL
+          </p>
+        </div>
+      </div>
+      <div class="container mx-auto p-4 bg-gray-50 rounded-lg shadow-md">
+        {/* <!-- LODI Retreat Bed Assignments --> */}
+        <h2 class="text-xl font-bold mb-4">LODI Retreat Bed Assignments</h2>
+
+        <div class="mb-6">
+          <label
+            for="bedAssignment1"
+            class="block text-gray-700 font-semibold mb-2"
+          >
+            Bed Assignment 1:
+          </label>
+          <input
+            id="bedAssignment1"
+            type="text"
+            placeholder="Enter name"
+            class="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label
+            for="bedAssignment2"
+            class="block text-gray-700 font-semibold mb-2"
+          >
+            Bed Assignment 2:
+          </label>
+          <input
+            id="bedAssignment2"
+            type="text"
+            placeholder="Enter name"
+            class="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label
+            for="bedAssignment3"
+            class="block text-gray-700 font-semibold mb-2"
+          >
+            Bed Assignment 3:
+          </label>
+          <input
+            id="bedAssignment3"
+            type="text"
+            placeholder="Enter name"
+            class="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label
+            for="bedAssignment4"
+            class="block text-gray-700 font-semibold mb-2"
+          >
+            Bed Assignment 4:
+          </label>
+          <input
+            id="bedAssignment4"
+            type="text"
+            placeholder="Enter name"
+            class="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        <div class="mb-6">
+          <label
+            for="bedAssignment5"
+            class="block text-gray-700 font-semibold mb-2"
+          >
+            Bed Assignment 5:
+          </label>
+          <input
+            id="bedAssignment5"
+            type="text"
+            placeholder="Enter name"
+            class="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <h2 className="text-xl font-bold mb-4">
+          Roster - Lake of Dreams Fall 2024 Retreat
+        </h2>
+        <div class="container mx-auto p-4 bg-white rounded-lg shadow-md">
+          {/* <!-- Roster Section --> */}
+          <h2 class="text-xl font-bold mb-4">Retreat Roster</h2>
+          <DynamicForm />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Chair;
+export default RetreatMemo;
