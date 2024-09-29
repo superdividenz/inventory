@@ -1,5 +1,4 @@
-// Boathouse.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   collection,
   addDoc,
@@ -8,46 +7,91 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "../firebase"; // Make sure this path is correct
+import { db } from "../firebase";
+import debounce from "lodash.debounce"; // You'll need to install this package
 
 function Boathouse() {
   const [items, setItems] = useState([]);
-  const [newItem, setNewItem] = useState({ name: "", quantity: 0 });
+  const [newItem, setNewItem] = useState({ name: "", quantity: "" });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchItems();
   }, []);
 
   const fetchItems = async () => {
-    const querySnapshot = await getDocs(collection(db, "boathouse"));
-    const inventoryData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    setItems(inventoryData);
-  };
-
-  const addItem = async () => {
-    if (newItem.name && newItem.quantity) {
-      await addDoc(collection(db, "boathouse"), {
-        name: newItem.name,
-        quantity: parseInt(newItem.quantity),
-      });
-      setNewItem({ name: "", quantity: 0 });
-      fetchItems();
+    try {
+      const querySnapshot = await getDocs(collection(db, "boathouse"));
+      const inventoryData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setItems(inventoryData);
+    } catch (err) {
+      setError("Failed to fetch items");
+      console.error(err);
     }
   };
 
-  const updateItem = async (id, updatedQuantity) => {
-    const itemDoc = doc(db, "boathouse", id);
-    await updateDoc(itemDoc, { quantity: parseInt(updatedQuantity) });
-    fetchItems();
+  const addItem = async () => {
+    if (newItem.name && newItem.quantity && !isNaN(newItem.quantity)) {
+      try {
+        const docRef = await addDoc(collection(db, "boathouse"), {
+          name: newItem.name,
+          quantity: parseInt(newItem.quantity),
+        });
+        setItems([...items, { id: docRef.id, ...newItem }]);
+        setNewItem({ name: "", quantity: "" });
+      } catch (err) {
+        setError("Failed to add item");
+        console.error(err);
+      }
+    }
+  };
+
+  const updateItem = useCallback(
+    (id, updatedQuantity) => {
+      const debouncedUpdate = debounce(async () => {
+        if (!isNaN(updatedQuantity)) {
+          try {
+            const itemDoc = doc(db, "boathouse", id);
+            await updateDoc(itemDoc, { quantity: parseInt(updatedQuantity) });
+          } catch (err) {
+            setError("Failed to update item");
+            console.error(err);
+            setItems(
+              items.map((item) =>
+                item.id === id ? { ...item, quantity: item.quantity } : item
+              )
+            );
+          }
+        }
+      }, 500);
+
+      debouncedUpdate();
+    },
+    [items]
+  );
+
+  const handleQuantityChange = (id, newQuantity) => {
+    // Optimistic update
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, quantity: newQuantity } : item
+      )
+    );
+    updateItem(id, newQuantity);
   };
 
   const deleteItem = async (id) => {
-    const itemDoc = doc(db, "boathouse", id);
-    await deleteDoc(itemDoc);
-    fetchItems();
+    try {
+      const itemDoc = doc(db, "boathouse", id);
+      await deleteDoc(itemDoc);
+      setItems(items.filter((item) => item.id !== id));
+    } catch (err) {
+      setError("Failed to delete item");
+      console.error(err);
+    }
   };
 
   return (
@@ -58,6 +102,8 @@ function Boathouse() {
         </div>
 
         <div className="p-6">
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+
           {/* Form to add new item */}
           <div className="mb-8 bg-gray-50 p-4 rounded-lg">
             <h3 className="text-xl font-semibold mb-4 text-blue-600">
@@ -74,7 +120,7 @@ function Boathouse() {
                 className="border border-gray-300 rounded-md p-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <input
-                type="text"
+                type="number"
                 placeholder="Quantity"
                 value={newItem.quantity}
                 onChange={(e) =>
@@ -105,12 +151,11 @@ function Boathouse() {
                   {item.name}
                 </div>
                 <input
-                  type="text"
+                  type="number"
                   value={item.quantity}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    updateItem(item.id, value);
-                  }}
+                  onChange={(e) =>
+                    handleQuantityChange(item.id, e.target.value)
+                  }
                   className="border border-gray-300 rounded-md p-2 w-full md:w-1/4 mt-2 md:mt-0 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
