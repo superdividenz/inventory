@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "https://lodi-website.web.app/",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
