@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import DynamicForm from "../components/DynamicForm";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import RetreatBanner from "../img/RetreatRocks.png";
+import DynamicForm from "../components/DynamicForm";
 
 const RetreatMemo = () => {
   const [chairName, setChairName] = useState("");
@@ -14,6 +16,22 @@ const RetreatMemo = () => {
     setter(event.target.value);
   };
 
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("Lake of Dreams 2024 Fall Recovery Retreat", 10, 10);
+
+    doc.setFontSize(12);
+    doc.text(`Chair: ${chairName} (${chairPhone})`, 10, 30);
+    doc.text(`Co-Chair: ${coChairName} (${coChairPhone})`, 10, 40);
+    doc.text(`Shadow: ${shadowName} (${shadowPhone})`, 10, 50);
+
+    // Add more content as needed
+
+    // Save the PDF
+    doc.save("retreat_memo.pdf");
+  };
+
   return (
     <div className="container mx-auto p-8 bg-gray-50 rounded-lg shadow-md">
       <img
@@ -21,6 +39,12 @@ const RetreatMemo = () => {
         alt="Retreat Banner"
         className="w-full h-auto mb-6 rounded-lg"
       />
+      <button
+        onClick={generatePDF}
+        className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600"
+      >
+        Generate PDF
+      </button>
       <p className="mb-4 text-gray-700 leading-relaxed">
         This email/memo is being sent to everyone who is registered for the
         upcoming{" "}
