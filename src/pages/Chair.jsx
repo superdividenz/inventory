@@ -554,14 +554,15 @@ const RetreatMemo = () => {
               class="block text-gray-700 font-semibold mb-1"
             >
               {" "}
-              Master Bedroom
+              Master (Paul Melnuk)
             </label>{" "}
             <input
               id="bedAssignment1"
               type="text"
-              placeholder="Retreat Chairperson"
+              placeholder="Not Available"
               class="w-full p-2 border border-gray-300 rounded"
-            />{" "}
+              disabled
+            />
           </div>{" "}
           <div class="mb-4">
             {" "}
