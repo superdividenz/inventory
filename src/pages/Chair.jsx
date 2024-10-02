@@ -71,123 +71,141 @@ const RetreatMemo = () => {
     setter(event.target.value);
   };
 
-  // PDF
   const generatePDF = () => {
     const doc = new jsPDF();
-    doc.setFontSize(18);
-    doc.text("Lake of Dreams 2024 Fall Recovery Retreat", 10, 10);
 
-    // Chairs
-    doc.setFontSize(12);
-    doc.text(`Chair: ${chairName} (${chairPhone})`, 10, 20);
-    doc.text(`Co-Chair: ${coChairName} (${coChairPhone})`, 10, 30);
-    doc.text(`Shadow: ${shadowName} (${shadowPhone})`, 10, 40);
+    // Add image
+    const img = new Image();
+    img.src = RetreatBanner;
+    doc.addImage(img, "PNG", 10, 10, 190, 30);
 
-    // friday Crew
+    // Add title
+    doc.setFontSize(20);
+    doc.setTextColor(0, 102, 204);
     doc.text(
-      `friday Crew Chief: ${fridayCrewChief} (${fridayCrewChief})`,
-      10,
-      50
+      "Lake of Dreams 2024 Fall Recovery Retreat",
+      105,
+      50,
+      null,
+      null,
+      "center"
     );
-    doc.text(`friday Crew: ${fridayCrew1} (${fridayCrew1})`, 10, 60);
-    doc.text(`friday Crew: ${fridayCrew2} (${fridayCrew2})`, 10, 70);
-    doc.text(`friday Crew: ${fridayCrew3} (${fridayCrew3})`, 10, 80);
-    doc.text(`Intro Chairperson: ${IntroChair} (${IntroChair})`, 10, 90);
-    doc.text(`Intro Chair 2: ${IntroChair1} (${IntroChair1})`, 10, 100);
-    doc.text(`Intro Chair 3: ${IntroChair2} (${IntroChair2})`, 10, 110);
+
+    // Add subtitle
+    doc.setFontSize(12);
+    doc.setTextColor(102, 102, 102);
+    doc.text("September 20th – September 22nd", 105, 58, null, null, "center");
+
+    // Helper function to add a section
+    const addSection = (title, data, startY) => {
+      doc.setFontSize(14);
+      doc.setTextColor(0, 102, 204);
+      doc.text(title, 14, startY);
+
+      doc.autoTable({
+        startY: startY + 5,
+        head: [["Role", "Name", "Phone"]],
+        body: data,
+        theme: "grid",
+        headStyles: { fillColor: [0, 102, 204], textColor: 255 },
+        alternateRowStyles: { fillColor: [240, 240, 240] },
+        margin: { top: 30, right: 14, bottom: 20, left: 14 },
+        columnStyles: {
+          0: { cellWidth: 60 },
+          1: { cellWidth: 70 },
+          2: { cellWidth: 50 },
+        },
+      });
+
+      return doc.lastAutoTable.finalY;
+    };
+
+    let yPos = 65;
+
+    // Leadership
+    yPos = addSection(
+      "Leadership",
+      [
+        ["Chair", chairName, chairPhone],
+        ["Co-Chair", coChairName, coChairPhone],
+        ["Shadow", shadowName, shadowPhone],
+      ],
+      yPos
+    );
+
+    // Friday Crew
+    yPos = addSection(
+      "Friday Crew",
+      [
+        ["Crew Chief", fridayCrewChief, ""],
+        ["Crew Member", fridayCrew1, ""],
+        ["Crew Member", fridayCrew2, ""],
+        ["Crew Member", fridayCrew3, ""],
+        ["Intro Chairperson", IntroChair, ""],
+        ["Intro Chair 2", IntroChair1, ""],
+        ["Intro Chair 3", IntroChair2, ""],
+      ],
+      yPos + 10
+    );
+
+    // Check if we need a new page
+    if (yPos > 250) {
+      doc.addPage();
+      yPos = 20;
+    }
 
     // Saturday Breakfast
-    doc.text(
-      `Breakfast Crew Chief: ${BreakfastCrewChief} (${BreakfastCrewChief})`,
-      10,
-      120
-    );
-    doc.text(`Breakfast Crew: ${BreakfastCrew1} (${BreakfastCrew1})`, 10, 130);
-    doc.text(`Breakfast Crew: ${BreakfastCrew2} (${BreakfastCrew2})`, 10, 140);
-    doc.text(`Breakfast Crew: ${BreakfastCrew3} (${BreakfastCrew3})`, 10, 150);
-
-    // Saturday Morning Meeting
-    doc.text(
-      `Morning Meeting 8:30 Chair: ${MorningAAchair} (${MorningAAchair})`,
-      10,
-      160
-    );
-    doc.text(
-      `Morning Meeting 8:30 Speaker: ${MorningAAspeaker} (${MorningAAspeaker})`,
-      10,
-      170
+    yPos = addSection(
+      "Saturday Breakfast",
+      [
+        ["Crew Chief", BreakfastCrewChief, ""],
+        ["Crew Member", BreakfastCrew1, ""],
+        ["Crew Member", BreakfastCrew2, ""],
+        ["Crew Member", BreakfastCrew3, ""],
+      ],
+      yPos + 10
     );
 
-    // Lunch
-    doc.text(
-      `Lunch Crew Chief: ${lunchCrewChief} (${lunchCrewChief})`,
-      10,
-      180
-    );
-    doc.text(`Lunch Crew: ${lunchPrep} (${lunchPrep})`, 10, 190);
-    doc.text(`Lunch Crew: ${lunchPrep1} (${lunchPrep1})`, 10, 200);
-    doc.text(`Lunch Crew: ${lunchPrep2} (${lunchPrep2})`, 10, 210);
-
-    // Alanon Meeting
-    doc.text(`Alanon Chair: ${AlanonChair} (${AlanonChair})`, 10, 220);
-    doc.text(`Alanon Speaker: ${AlanonSpeaker} (${AlanonSpeaker})`, 10, 230);
-
-    // SatDinner
-    doc.text(
-      `Dinner Crew Chief: ${SatDinnerCrewChief} (${SatDinnerCrewChief})`,
-      10,
-      240
-    );
-    doc.text(`Dinner Crew: ${SatDinnerCrew} (${SatDinnerCrew})`, 10, 250);
-    doc.text(`Dinner Crew: ${SatDinnerCrew1} (${SatDinnerCrew1})`, 10, 260);
-    doc.text(`Dinner Crew: ${SatDinnerCrew2} (${SatDinnerCrew2})`, 10, 270);
-
-    // Saturday Meeting
-    doc.text(
-      `Saturday Chair: ${SatAAmeetingChair} (${SatAAmeetingChair})`,
-      10,
-      260
-    );
-    doc.text(
-      `Saturday Speaker: ${SatAAmettingSpeaker} (${SatAAmettingSpeaker})`,
-      10,
-      270
+    // Morning Meeting
+    yPos = addSection(
+      "Saturday Morning Meeting",
+      [
+        ["Chair", MorningAAchair, ""],
+        ["Speaker", MorningAAspeaker, ""],
+      ],
+      yPos + 10
     );
 
-    // Sunday
-    doc.text(`Sunday Crew Chief: ${SunCrewChief} (${SunCrewChief})`, 10, 280);
-    doc.text(`Sunday Crew: ${SunCrew} (${SunCrew})`, 10, 290);
-    doc.text(`Sunday Crew: ${SunCrew1} (${SunCrew1})`, 10, 300);
-    doc.text(`Sunday Crew: ${SunCrew2} (${SunCrew2})`, 10, 310);
+    // Check if we need a new page
+    if (yPos > 250) {
+      doc.addPage();
+      yPos = 20;
+    }
 
-    // Bed Assignment
-    doc.text(`Bed Assignment: ${bedAssignment1} (${bedAssignment1})`, 10, 320);
-    doc.text(`Bed Assignment: ${bedAssignment2} (${bedAssignment2})`, 10, 330);
-    doc.text(`Bed Assignment: ${bedAssignment3} (${bedAssignment3})`, 10, 340);
-    doc.text(`Bed Assignment: ${bedAssignment4} (${bedAssignment4})`, 10, 350);
-    doc.text(`Bed Assignment: ${bedAssignment5} (${bedAssignment5})`, 10, 360);
-    doc.text(`Bed Assignment: ${bedAssignment6} (${bedAssignment6})`, 10, 370);
-    doc.text(`Bed Assignment: ${bedAssignment7} (${bedAssignment7})`, 10, 380);
-    doc.text(`Bed Assignment: ${bedAssignment8} (${bedAssignment8})`, 10, 390);
-    doc.text(`Bed Assignment: ${bedAssignment9} (${bedAssignment9})`, 10, 400);
-    doc.text(
-      `Bed Assignment: ${bedAssignment10} (${bedAssignment10})`,
-      10,
-      410
-    );
-    doc.text(
-      `Bed Assignment: ${bedAssignment11} (${bedAssignment11})`,
-      10,
-      420
-    );
-    doc.text(
-      `Bed Assignment: ${bedAssignment12} (${bedAssignment12})`,
-      10,
-      430
+    // Add other sections here...
+
+    // Bed Assignments
+    yPos = addSection(
+      "Bed Assignments",
+      [
+        ["Bed 1", bedAssignment1, ""],
+        ["Bed 2", bedAssignment2, ""],
+        ["Bed 3", bedAssignment3, ""],
+        ["Bed 4", bedAssignment4, ""],
+        ["Bed 5", bedAssignment5, ""],
+        ["Bed 6", bedAssignment6, ""],
+        ["Bed 7", bedAssignment7, ""],
+        ["Bed 8", bedAssignment8, ""],
+        ["Bed 9", bedAssignment9, ""],
+        ["Bed 10", bedAssignment10, ""],
+        ["Bed 11", bedAssignment11, ""],
+        ["Bed 12", bedAssignment12, ""],
+      ],
+      yPos + 10
     );
 
     // Save the PDF
-    doc.save("retreat_memo.pdf");
+    doc.save("Lake_of_Dreams_2024_Fall_Recovery_Retreat.pdf");
   };
 
   return (

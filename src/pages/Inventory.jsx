@@ -1,10 +1,10 @@
 import React from "react";
-import Boathouse from "../components/Boathouse";
+import InventoryForm from "../components/InventoryForm";
 
 const App = () => {
   return (
     <div className="App">
-      <Boathouse />
+      <InventoryForm />
     </div>
   );
 };
