@@ -97,9 +97,14 @@ function InventoryForm() {
             required
           />
           <input
-            type="number"
+            type="text"
             value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value))}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[a-zA-Z0-9\s]*$/.test(value)) {
+                setQuantity(value);
+              }
+            }}
             placeholder="Quantity"
             className="border rounded-md p-2 w-full"
             required
@@ -114,6 +119,7 @@ function InventoryForm() {
             <option value="downstairs_freezer">Downstairs Freezer</option>
             <option value="downstairs_fridge">Downstairs Fridge</option>
             <option value="downstairs_shelves">Downstairs Shelves</option>
+            <option value="boathouse">Boathouse</option>
           </select>
           <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
             {editingItem ? "Update Item" : "Add Item"}
@@ -125,50 +131,67 @@ function InventoryForm() {
             onClick={() => {
               setEditingItem(null);
               setName("");
-              setQuantity(0);
+              setQuantity("");
               setLocation("inventory");
             }}
             className="mt-4 bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition duration-300"
           >
             Cancel Edit
           </button>
-          
         )}
       </form>
 
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Inventory List</h2>
-        <ul className="divide-y divide-gray-200">
-          {items.map(item => (
-            <li key={item.id} className="py-4 flex justify-between items-center">
-              <div>
-                <span className="font-medium">{item.name}</span>
-                <span className="ml-2 text-gray-600">Quantity: {item.quantity}</span>
-                <span className="ml-2 text-gray-600">Location: {item.location}</span>
-              </div>
-              <div>
-              <button
-  onClick={() => handleEdit(item)}
-  className="mr-2 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-sm transition duration-300"
->
-  Edit
-</button>
-<button
-  onClick={() => handleDelete(item.id)}
-  className="mr-2 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded text-sm transition duration-300"
->
-  Delete
-</button>
-<button
-  onClick={downloadExcel}
-  className="mt-2 md:mt-0 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
->
-  Download Excel
-</button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-semibold text-gray-800">Inventory List</h2>
+          <button
+            onClick={downloadExcel}
+            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
+            Download Excel
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {items.map(item => (
+                <tr key={item.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">{item.name}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">{item.quantity}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">{item.location}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <button
+                      onClick={() => handleEdit(item)}
+                      className="text-indigo-600 hover:text-indigo-900 mr-2"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
