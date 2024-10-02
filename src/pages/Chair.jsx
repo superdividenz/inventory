@@ -5,28 +5,186 @@ import RetreatBanner from "../img/RetreatRocks.png";
 import DynamicForm from "../components/DynamicForm";
 
 const RetreatMemo = () => {
+  // Chairs
   const [chairName, setChairName] = useState("");
   const [chairPhone, setChairPhone] = useState("");
   const [coChairName, setCoChairName] = useState("");
   const [coChairPhone, setCoChairPhone] = useState("");
   const [shadowName, setShadowName] = useState("");
   const [shadowPhone, setShadowPhone] = useState("");
+  // Friday Dinner
+  const [fridayCrewChief, setfridayCrewChief] = useState("");
+  const [fridayCrew1, setfridayCrew1] = useState("");
+  const [fridayCrew2, setfridayCrew2] = useState("");
+  const [fridayCrew3, setfridayCrew3] = useState("");
+  const [IntroChair, setIntroChair] = useState("");
+  const [IntroChair1, setIntroChair1] = useState("");
+  const [IntroChair2, setIntroChair2] = useState("");
+  // breakfast
+  const [BreakfastCrewChief, setBreakfastCrewChief] = useState("");
+  const [BreakfastCrew1, setBreakfastCrew1] = useState("");
+  const [BreakfastCrew2, setBreakfastCrew2] = useState("");
+  const [BreakfastCrew3, setBreakfastCrew3] = useState("");
+  const [MorningAAchair, setMorningAAchair] = useState("");
+  const [MorningAAspeaker, setMorningAAspeaker] = useState("");
+  // lunch
+  const [lunchCrewChief, setlunchCrewChief] = useState("");
+  const [lunchPrep, setlunchPrep] = useState("");
+  const [lunchPrep1, setlunchPrep1] = useState("");
+  const [lunchPrep2, setlunchPrep2] = useState("");
+
+  // Alanon Meeting
+  const [AlanonChair, setAlanonChair] = useState("");
+  const [AlanonSpeaker, setAlanonSpeaker] = useState("");
+
+  // Dinner
+  const [SatDinnerCrewChief, setSatDinnerCrewChief] = useState("");
+  const [SatDinnerCrew, setSatDinnerCrew] = useState("");
+  const [SatDinnerCrew1, setSatDinnerCrew1] = useState("");
+  const [SatDinnerCrew2, setSatDinnerCrew2] = useState("");
+
+  // Saturday Meeting
+  const [SatAAmeetingChair, setSatAAmeetingChair] = useState("");
+  const [SatAAmettingSpeaker, setSatAAmettingSpeaker] = useState("");
+
+  // Sunday
+  const [SunCrewChief, setSunCrewChief] = useState("");
+  const [SunCrew, setSunCrew] = useState("");
+  const [SunCrew1, setSunCrew1] = useState("");
+  const [SunCrew2, setSunCrew2] = useState("");
+
+  // Bed Assognment
+  const [bedAssignment1, setbedAssignment1] = useState("");
+  const [bedAssignment2, setbedAssignment2] = useState("");
+  const [bedAssignment3, setbedAssignment3] = useState("");
+  const [bedAssignment4, setbedAssignment4] = useState("");
+  const [bedAssignment5, setbedAssignment5] = useState("");
+  const [bedAssignment6, setbedAssignment6] = useState("");
+  const [bedAssignment7, setbedAssignment7] = useState("");
+  const [bedAssignment8, setbedAssignment8] = useState("");
+  const [bedAssignment9, setbedAssignment9] = useState("");
+  const [bedAssignment10, setbedAssignment10] = useState("");
+  const [bedAssignment11, setbedAssignment11] = useState("");
+  const [bedAssignment12, setbedAssignment12] = useState("");
 
   const handleChange = (setter) => (event) => {
     setter(event.target.value);
   };
 
+  // PDF
   const generatePDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(18);
     doc.text("Lake of Dreams 2024 Fall Recovery Retreat", 10, 10);
 
+    // Chairs
     doc.setFontSize(12);
-    doc.text(`Chair: ${chairName} (${chairPhone})`, 10, 30);
-    doc.text(`Co-Chair: ${coChairName} (${coChairPhone})`, 10, 40);
-    doc.text(`Shadow: ${shadowName} (${shadowPhone})`, 10, 50);
+    doc.text(`Chair: ${chairName} (${chairPhone})`, 10, 20);
+    doc.text(`Co-Chair: ${coChairName} (${coChairPhone})`, 10, 30);
+    doc.text(`Shadow: ${shadowName} (${shadowPhone})`, 10, 40);
 
-    // Add more content as needed
+    // friday Crew
+    doc.text(
+      `friday Crew Chief: ${fridayCrewChief} (${fridayCrewChief})`,
+      10,
+      50
+    );
+    doc.text(`friday Crew: ${fridayCrew1} (${fridayCrew1})`, 10, 60);
+    doc.text(`friday Crew: ${fridayCrew2} (${fridayCrew2})`, 10, 70);
+    doc.text(`friday Crew: ${fridayCrew3} (${fridayCrew3})`, 10, 80);
+    doc.text(`Intro Chairperson: ${IntroChair} (${IntroChair})`, 10, 90);
+    doc.text(`Intro Chair 2: ${IntroChair1} (${IntroChair1})`, 10, 100);
+    doc.text(`Intro Chair 3: ${IntroChair2} (${IntroChair2})`, 10, 110);
+
+    // Saturday Breakfast
+    doc.text(
+      `Breakfast Crew Chief: ${BreakfastCrewChief} (${BreakfastCrewChief})`,
+      10,
+      120
+    );
+    doc.text(`Breakfast Crew: ${BreakfastCrew1} (${BreakfastCrew1})`, 10, 130);
+    doc.text(`Breakfast Crew: ${BreakfastCrew2} (${BreakfastCrew2})`, 10, 140);
+    doc.text(`Breakfast Crew: ${BreakfastCrew3} (${BreakfastCrew3})`, 10, 150);
+
+    // Saturday Morning Meeting
+    doc.text(
+      `Morning Meeting 8:30 Chair: ${MorningAAchair} (${MorningAAchair})`,
+      10,
+      160
+    );
+    doc.text(
+      `Morning Meeting 8:30 Speaker: ${MorningAAspeaker} (${MorningAAspeaker})`,
+      10,
+      170
+    );
+
+    // Lunch
+    doc.text(
+      `Lunch Crew Chief: ${lunchCrewChief} (${lunchCrewChief})`,
+      10,
+      180
+    );
+    doc.text(`Lunch Crew: ${lunchPrep} (${lunchPrep})`, 10, 190);
+    doc.text(`Lunch Crew: ${lunchPrep1} (${lunchPrep1})`, 10, 200);
+    doc.text(`Lunch Crew: ${lunchPrep2} (${lunchPrep2})`, 10, 210);
+
+    // Alanon Meeting
+    doc.text(`Alanon Chair: ${AlanonChair} (${AlanonChair})`, 10, 220);
+    doc.text(`Alanon Speaker: ${AlanonSpeaker} (${AlanonSpeaker})`, 10, 230);
+
+    // SatDinner
+    doc.text(
+      `Dinner Crew Chief: ${SatDinnerCrewChief} (${SatDinnerCrewChief})`,
+      10,
+      240
+    );
+    doc.text(`Dinner Crew: ${SatDinnerCrew} (${SatDinnerCrew})`, 10, 250);
+    doc.text(`Dinner Crew: ${SatDinnerCrew1} (${SatDinnerCrew1})`, 10, 260);
+    doc.text(`Dinner Crew: ${SatDinnerCrew2} (${SatDinnerCrew2})`, 10, 270);
+
+    // Saturday Meeting
+    doc.text(
+      `Saturday Chair: ${SatAAmeetingChair} (${SatAAmeetingChair})`,
+      10,
+      260
+    );
+    doc.text(
+      `Saturday Speaker: ${SatAAmettingSpeaker} (${SatAAmettingSpeaker})`,
+      10,
+      270
+    );
+
+    // Sunday
+    doc.text(`Sunday Crew Chief: ${SunCrewChief} (${SunCrewChief})`, 10, 280);
+    doc.text(`Sunday Crew: ${SunCrew} (${SunCrew})`, 10, 290);
+    doc.text(`Sunday Crew: ${SunCrew1} (${SunCrew1})`, 10, 300);
+    doc.text(`Sunday Crew: ${SunCrew2} (${SunCrew2})`, 10, 310);
+
+    // Bed Assignment
+    doc.text(`Bed Assignment: ${bedAssignment1} (${bedAssignment1})`, 10, 320);
+    doc.text(`Bed Assignment: ${bedAssignment2} (${bedAssignment2})`, 10, 330);
+    doc.text(`Bed Assignment: ${bedAssignment3} (${bedAssignment3})`, 10, 340);
+    doc.text(`Bed Assignment: ${bedAssignment4} (${bedAssignment4})`, 10, 350);
+    doc.text(`Bed Assignment: ${bedAssignment5} (${bedAssignment5})`, 10, 360);
+    doc.text(`Bed Assignment: ${bedAssignment6} (${bedAssignment6})`, 10, 370);
+    doc.text(`Bed Assignment: ${bedAssignment7} (${bedAssignment7})`, 10, 380);
+    doc.text(`Bed Assignment: ${bedAssignment8} (${bedAssignment8})`, 10, 390);
+    doc.text(`Bed Assignment: ${bedAssignment9} (${bedAssignment9})`, 10, 400);
+    doc.text(
+      `Bed Assignment: ${bedAssignment10} (${bedAssignment10})`,
+      10,
+      410
+    );
+    doc.text(
+      `Bed Assignment: ${bedAssignment11} (${bedAssignment11})`,
+      10,
+      420
+    );
+    doc.text(
+      `Bed Assignment: ${bedAssignment12} (${bedAssignment12})`,
+      10,
+      430
+    );
 
     // Save the PDF
     doc.save("retreat_memo.pdf");
@@ -225,10 +383,10 @@ const RetreatMemo = () => {
         <h3 className="text-lg font-semibold mb-2">
           Crew Chief:
           <input
-            id="crewChief"
+            id="fridayCrewChief"
             type="text"
-            value=""
-            onChange=""
+            value={fridayCrewChief}
+            onChange={handleChange(setfridayCrewChief)}
             className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </h3>
@@ -236,28 +394,28 @@ const RetreatMemo = () => {
         <ul className="list-disc list-inside mb-4">
           <li>
             <input
-              id="chairName"
+              id="fridayCrew1"
               type="text"
-              value=""
-              onChange=""
+              value={fridayCrew1}
+              onChange={handleChange(setfridayCrew1)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </li>
           <li>
             <input
-              id="chairName"
+              id="fridayCrew2"
               type="text"
-              value=""
-              onChange=""
+              value={fridayCrew2}
+              onChange={handleChange(setfridayCrew2)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </li>
           <li>
             <input
-              id="chairName"
+              id="fridayCrew3"
               type="text"
-              value=""
-              onChange=""
+              value={fridayCrew3}
+              onChange={handleChange(setfridayCrew3)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </li>
@@ -268,24 +426,24 @@ const RetreatMemo = () => {
         <p class="mb-4">
           <strong>7:30 PM – Introductions Meeting:</strong>{" "}
           <input
-            id=""
+            id="IntroChair"
             type="text"
-            value=""
-            onChange=""
+            value={IntroChair}
+            onChange={handleChange(setIntroChair)}
             className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            id=""
+            id="IntroChair1"
             type="text"
-            value=""
-            onChange=""
+            value={IntroChair1}
+            onChange={handleChange(setIntroChair1)}
             className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            id=""
+            id="IntroChair2"
             type="text"
-            value=""
-            onChange=""
+            value={IntroChair2}
+            onChange={handleChange(setIntroChair2)}
             className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <br />
@@ -309,34 +467,34 @@ const RetreatMemo = () => {
           <p>
             <strong>Crew Chief:</strong>
             <input
-              id=""
+              id="BreakfastCrewChief"
               type="text"
-              value=""
-              onChange=""
+              value={BreakfastCrewChief}
+              onChange={handleChange(setBreakfastCrewChief)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>Prep, Cleanup, Beverages:</strong>
             <input
-              id=""
+              id="BreakfastCrew1"
               type="text"
-              value=""
-              onChange=""
+              value={BreakfastCrew1}
+              onChange={handleChange(setBreakfastCrew1)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="BreakfastCrew2"
               type="text"
-              value=""
-              onChange=""
+              value={BreakfastCrew2}
+              onChange={handleChange(setBreakfastCrew2)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="BreakfastCrew3"
               type="text"
-              value=""
-              onChange=""
+              value={BreakfastCrew3}
+              onChange={handleChange(setBreakfastCrew3)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -349,20 +507,20 @@ const RetreatMemo = () => {
           <p>
             <strong>AA Chair:</strong>
             <input
-              id=""
+              id="MorningAAchair"
               type="text"
-              value=""
-              onChange=""
+              value={MorningAAchair}
+              onChange={handleChange(setMorningAAchair)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>AA Speaker:</strong>
             <input
-              id=""
+              id="MorningAAspeaker"
               type="text"
-              value=""
-              onChange=""
+              value={MorningAAspeaker}
+              onChange={handleChange(setMorningAAspeaker)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -375,34 +533,34 @@ const RetreatMemo = () => {
           <p>
             <strong>Crew Chief:</strong>
             <input
-              id=""
+              id="lunchCrewChief"
               type="text"
-              value=""
-              onChange=""
+              value={lunchCrewChief}
+              onChange={handleChange(setlunchCrewChief)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>Prep, Cleanup, Beverages:</strong>
             <input
-              id=""
+              id="lunchPrep"
               type="text"
-              value=""
-              onChange=""
+              value={lunchPrep}
+              onChange={handleChange(setlunchPrep)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="lunchPrep1"
               type="text"
-              value=""
-              onChange=""
+              value={lunchPrep1}
+              onChange={handleChange(setlunchPrep1)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="lunchPrep2"
               type="text"
-              value=""
-              onChange=""
+              value={lunchPrep2}
+              onChange={handleChange(setlunchPrep2)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -415,20 +573,20 @@ const RetreatMemo = () => {
           <p>
             <strong>Al-Anon Chair:</strong>
             <input
-              id=""
+              id="AlanonChair"
               type="text"
-              value=""
-              onChange=""
+              value={AlanonChair}
+              onChange={handleChange(setAlanonChair)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>Al-Anon Speaker:</strong>
             <input
-              id=""
+              id="AlanonSpeaker"
               type="text"
-              value=""
-              onChange=""
+              value={AlanonSpeaker}
+              onChange={handleChange(setAlanonSpeaker)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -442,34 +600,34 @@ const RetreatMemo = () => {
           <p>
             <strong>Crew Chief:</strong>
             <input
-              id=""
+              id="SatDinnerCrewChief"
               type="text"
-              value=""
-              onChange=""
+              value={SatDinnerCrewChief}
+              onChange={handleChange(setSatDinnerCrewChief)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>Prep, Cleanup, Beverages:</strong>{" "}
             <input
-              id=""
+              id="SatDinnerCrew"
               type="text"
-              value=""
-              onChange=""
+              value={SatDinnerCrew}
+              onChange={handleChange(setSatDinnerCrew)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="SatDinnerCrew1"
               type="text"
-              value=""
-              onChange=""
+              value={SatDinnerCrew1}
+              onChange={handleChange(setSatDinnerCrew1)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="SatDinnerCrew2"
               type="text"
-              value=""
-              onChange=""
+              value={SatDinnerCrew2}
+              onChange={handleChange(setSatDinnerCrew2)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -483,20 +641,20 @@ const RetreatMemo = () => {
           <p>
             <strong>AA Chair:</strong>
             <input
-              id=""
+              id="SatAAmettingChair"
               type="text"
-              value=""
-              onChange=""
+              value={SatAAmeetingChair}
+              onChange={handleChange(setSatAAmeetingChair)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>AA Speaker:</strong>
             <input
-              id=""
+              id="SatAAmettingSpeaker"
               type="text"
-              value=""
-              onChange=""
+              value={SatAAmettingSpeaker}
+              onChange={handleChange(setSatAAmettingSpeaker)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -518,34 +676,34 @@ const RetreatMemo = () => {
           <p>
             <strong>Crew Chief:</strong>
             <input
-              id=""
+              id="SunCrewChief"
               type="text"
-              value=""
-              onChange=""
+              value={SunCrewChief}
+              onChange={handleChange(setSunCrewChief)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
           <p>
             <strong>Prep, Cleanup, Beverages:</strong>
             <input
-              id=""
+              id="SunCrew"
               type="text"
-              value=""
-              onChange=""
+              value={SunCrew}
+              onChange={handleChange(setSunCrew)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="SunCrew1"
               type="text"
-              value=""
-              onChange=""
+              value={SunCrew1}
+              onChange={handleChange(setSunCrew1)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <input
-              id=""
+              id="SunCrew2"
               type="text"
-              value=""
-              onChange=""
+              value={SunCrew2}
+              onChange={handleChange(setSunCrew2)}
               className="ml-2 px-2 py-1 border border-gray-300 rounded text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </p>
@@ -564,17 +722,16 @@ const RetreatMemo = () => {
           </p>
         </div>
       </div>
+
+      {/* <!-- LODI Retreat Bed Assignments --> */}
       <div class="container mx-auto p-4 bg-gray-50 rounded-lg shadow-md">
-        {/* <!-- LODI Retreat Bed Assignments --> */}
-        <h2 class="text-xl font-bold mb-4">
-          LODI Retreat Bed Assignments
-        </h2>{" "}
+        <h2 class="text-xl font-bold mb-4">LODI Retreat Bed Assignments</h2>{" "}
         <div class="grid grid-cols-2 gap-4">
           {" "}
           <div class="mb-4">
             {" "}
             <label
-              for="bedAssignment1"
+              for="Not Available"
               class="block text-gray-700 font-semibold mb-1"
             >
               {" "}
@@ -584,6 +741,8 @@ const RetreatMemo = () => {
               id="bedAssignment1"
               type="text"
               placeholder="Not Available"
+              value={bedAssignment1}
+              onChange={handleChange(setbedAssignment1)}
               class="w-full p-2 border border-gray-300 rounded"
               disabled
             />
@@ -601,6 +760,8 @@ const RetreatMemo = () => {
               id="bedAssignment2"
               type="text"
               placeholder="Retreat Co-Chairperson"
+              value={bedAssignment2}
+              onChange={handleChange(setbedAssignment2)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -618,6 +779,8 @@ const RetreatMemo = () => {
               id="bedAssignment3"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment3}
+              onChange={handleChange(setbedAssignment3)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -635,6 +798,8 @@ const RetreatMemo = () => {
               id="bedAssignment4"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment4}
+              onChange={handleChange(setbedAssignment4)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -652,6 +817,8 @@ const RetreatMemo = () => {
               id="bedAssignment5"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment5}
+              onChange={handleChange(setbedAssignment5)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -669,6 +836,8 @@ const RetreatMemo = () => {
               id="bedAssignment6"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment6}
+              onChange={handleChange(setbedAssignment6)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -686,6 +855,8 @@ const RetreatMemo = () => {
               id="bedAssignment7"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment7}
+              onChange={handleChange(setbedAssignment7)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -703,6 +874,8 @@ const RetreatMemo = () => {
               id="bedAssignment8"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment8}
+              onChange={handleChange(setbedAssignment8)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -720,6 +893,8 @@ const RetreatMemo = () => {
               id="bedAssignment9"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment9}
+              onChange={handleChange(setbedAssignment9)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -737,6 +912,8 @@ const RetreatMemo = () => {
               id="bedAssignment10"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment10}
+              onChange={handleChange(setbedAssignment10)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -754,6 +931,8 @@ const RetreatMemo = () => {
               id="bedAssignment11"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment11}
+              onChange={handleChange(setbedAssignment11)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
@@ -771,6 +950,8 @@ const RetreatMemo = () => {
               id="bedAssignment12"
               type="text"
               placeholder="Enter names comma seperated"
+              value={bedAssignment12}
+              onChange={handleChange(setbedAssignment12)}
               class="w-full p-2 border border-gray-300 rounded"
               readonly
             />{" "}
